@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact and Support | QR Studio</title>
+<meta name="description" content="Get in touch with QR Studio for support, feedback or abuse reports.">
+<link rel="canonical" href="https://example.com/contact.html">
+<meta property="og:title" content="Contact and Support | QR Studio">
+<meta property="og:description" content="Get in touch with QR Studio for support, feedback or abuse reports.">
+<meta property="og:type" content="website">
+<!--icons-->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#e9f0ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1a18" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!--/icons-->
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="QR Studio home"><svg viewBox="0 0 9 9" aria-hidden="true" focusable="false"><path class="i" d="M0 0h7v7H0zM1 1v5h5V1z" fill-rule="evenodd"/><rect class="i" x="2" y="2" width="3" height="3"/><rect class="a" x="6" y="6" width="3" height="3"/></svg><span>QR<b>Studio</b></span></a>
+  <nav class="main" aria-label="Main"><a href="generator.html">Generator</a><a href="help.html">Help &amp; FAQ</a><a href="contact.html" aria-current="page">Contact</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<h1>Contact &amp; support</h1>
+<p class="lead">Questions, feedback, or a code that is being misused? Send us a message.</p>
+<form id="cf" class="contact-form" novalidate>
+  <label for="cn">Name</label><input id="cn" type="text" required autocomplete="name">
+  <label for="ce">Your email</label><input id="ce" type="email" required autocomplete="email">
+  <label for="cm">Message</label><textarea id="cm" required></textarea>
+  <p class="err" id="cerr" role="alert"></p>
+  <p style="margin-top:18px"><button class="btn" type="submit">Send message</button></p>
+  <p class="note">This opens your email app addressed to <a id="addr" href="mailto:hello@example.com">hello@example.com</a>.</p>
+</form>
+</main>
+<footer class="site"><div class="wrap">
+  <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="help.html">Help</a><a href="contact.html">Contact</a>
+  <p>&copy; 2026 QR Studio. QR Code is a registered trademark of DENSO WAVE INCORPORATED.</p>
+</div></footer>
+<script>
+document.getElementById('cf').addEventListener('submit',function(e){
+  e.preventDefault();
+  var n=cn.value.trim(),m=ce.value.trim(),b=cm.value.trim(),er=document.getElementById('cerr');
+  if(!n||!b||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m)){er.textContent='Please enter your name, a valid email and a message.';return;}
+  er.textContent='';
+  var to=document.getElementById('addr').textContent;
+  location.href='mailto:'+to+'?subject='+encodeURIComponent('QR Studio support from '+n)+'&body='+encodeURIComponent(b+'\n\nReply to: '+m);
+});
+</script>
+</body>
+</html>

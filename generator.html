@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free QR Code Generator – URL, Wi-Fi, vCard, WhatsApp | QR Studio</title>
+<meta name="description" content="Create free QR codes for websites, text, Wi-Fi, contacts, email, phone, SMS, WhatsApp, locations and events. Customize colors and download PNG or SVG. No signup.">
+<link rel="canonical" href="https://example.com/generator.html">
+<meta property="og:title" content="Free QR Code Generator | QR Studio">
+<meta property="og:description" content="Create, customize and download QR codes in your browser. No signup, nothing uploaded.">
+<meta property="og:type" content="website">
+<!--icons-->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#e9f0ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1a18" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!--/icons-->
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="QR Studio home"><svg viewBox="0 0 9 9" aria-hidden="true" focusable="false"><path class="i" d="M0 0h7v7H0zM1 1v5h5V1z" fill-rule="evenodd"/><rect class="i" x="2" y="2" width="3" height="3"/><rect class="a" x="6" y="6" width="3" height="3"/></svg><span>QR<b>Studio</b></span></a>
+  <nav class="main" aria-label="Main"><a href="generator.html" aria-current="page">Generator</a><a href="help.html">Help &amp; FAQ</a><a href="contact.html">Contact</a></nav>
+</div></header>
+
+<main id="main" class="wrap">
+  <h1>Free QR code generator</h1>
+  <p class="lead">Pick a type, fill in the details, style it and download. Everything happens in your browser: nothing you type is uploaded or stored.</p>
+
+  <div class="gen">
+    <section aria-labelledby="h-data">
+      <h2 id="h-data" class="sr">QR code content</h2>
+      <ul class="tabs" role="tablist" aria-label="QR code type" id="tabs"></ul>
+
+      <div class="panel">
+        <form id="form" novalidate autocomplete="off">
+          <fieldset data-type="url" class="plain">
+            <label for="url">Website address</label>
+            <input id="url" name="url" type="text" inputmode="url" placeholder="example.com/page">
+          </fieldset>
+
+          <fieldset data-type="text" class="plain" hidden>
+            <label for="text">Text <span class="hint" id="textCount"></span></label>
+            <textarea id="text" name="text" placeholder="Type any message…"></textarea>
+          </fieldset>
+
+          <fieldset data-type="wifi" class="plain" hidden>
+            <label for="ssid">Network name (SSID)</label>
+            <input id="ssid" name="ssid" type="text" maxlength="32">
+            <div class="row">
+              <div><label for="security">Security</label>
+                <select id="security" name="security"><option value="WPA">WPA/WPA2/WPA3</option><option value="WEP">WEP</option><option value="nopass">No password</option></select></div>
+              <div id="pwBox"><label for="password">Password</label><input id="password" name="password" type="text" autocomplete="off"></div>
+            </div>
+            <label class="check"><input type="checkbox" name="hidden"> Hidden network</label>
+            <p class="note">Anyone who scans this code can join the network. Only share it where that is acceptable.</p>
+          </fieldset>
+
+          <fieldset data-type="vcard" class="plain" hidden>
+            <div class="row">
+              <div><label for="firstName">First name</label><input id="firstName" name="firstName" type="text"></div>
+              <div><label for="lastName">Last name</label><input id="lastName" name="lastName" type="text"></div>
+              <div><label for="org">Organization</label><input id="org" name="org" type="text"></div>
+              <div><label for="jobTitle">Job title</label><input id="jobTitle" name="title" type="text"></div>
+              <div><label for="vphone">Phone</label><input id="vphone" name="phone" type="tel" placeholder="+14155550123"></div>
+              <div><label for="vemail">Email</label><input id="vemail" name="email" type="email"></div>
+            </div>
+            <label for="vsite">Website</label><input id="vsite" name="website" type="text" inputmode="url">
+            <label for="vaddr">Address</label><input id="vaddr" name="address" type="text">
+          </fieldset>
+
+          <fieldset data-type="email" class="plain" hidden>
+            <label for="to">Email address</label><input id="to" name="to" type="email">
+            <label for="subject">Subject <span class="hint">(optional)</span></label><input id="subject" name="subject" type="text">
+            <label for="body">Message <span class="hint">(optional)</span></label><textarea id="body" name="body"></textarea>
+          </fieldset>
+
+          <fieldset data-type="phone" class="plain" hidden>
+            <label for="phone">Phone number</label><input id="phone" name="phone" type="tel" placeholder="+14155550123">
+          </fieldset>
+
+          <fieldset data-type="sms" class="plain" hidden>
+            <label for="smsPhone">Phone number</label><input id="smsPhone" name="phone" type="tel" placeholder="+14155550123">
+            <label for="smsMsg">Message <span class="hint">(optional)</span></label><textarea id="smsMsg" name="message"></textarea>
+          </fieldset>
+
+          <fieldset data-type="whatsapp" class="plain" hidden>
+            <label for="waPhone">WhatsApp number <span class="hint">(international format)</span></label>
+            <input id="waPhone" name="phone" type="tel" placeholder="+14155550123">
+            <label for="waMsg">Prefilled message <span class="hint">(optional)</span></label><textarea id="waMsg" name="message"></textarea>
+          </fieldset>
+
+          <fieldset data-type="location" class="plain" hidden>
+            <div class="row">
+              <div><label for="lat">Latitude</label><input id="lat" name="lat" type="text" inputmode="decimal" placeholder="40.7128"></div>
+              <div><label for="lng">Longitude</label><input id="lng" name="lng" type="text" inputmode="decimal" placeholder="-74.0060"></div>
+            </div>
+            <p class="note">Opens the point in Google Maps on most phones.</p>
+          </fieldset>
+
+          <fieldset data-type="event" class="plain" hidden>
+            <label for="evTitle">Event name</label><input id="evTitle" name="title" type="text">
+            <div class="row">
+              <div><label for="evStart">Starts</label><input id="evStart" name="start" type="datetime-local"></div>
+              <div><label for="evEnd">Ends <span class="hint">(optional)</span></label><input id="evEnd" name="end" type="datetime-local"></div>
+            </div>
+            <label for="evLoc">Location <span class="hint">(optional)</span></label><input id="evLoc" name="location" type="text">
+            <label for="evDesc">Description <span class="hint">(optional)</span></label><textarea id="evDesc" name="description"></textarea>
+          </fieldset>
+
+          <fieldset data-type="social" class="plain" hidden>
+            <label for="platform">Platform</label>
+            <select id="platform" name="platform">
+              <option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="x">X / Twitter</option>
+              <option value="linkedin">LinkedIn</option><option value="youtube">YouTube</option><option value="tiktok">TikTok</option><option value="other">Other (any link)</option>
+            </select>
+            <label for="profile">Profile link or username</label><input id="profile" name="profile" type="text" placeholder="@yourname or full link">
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-prev" class="sticky">
+      <h2 id="h-prev" class="sr">Preview and style</h2>
+      <div class="preview" id="previewBox">
+        <canvas id="canvas" class="hidden" role="img" aria-label="Generated QR code preview"></canvas>
+        <p class="empty" id="empty">Fill in the form and your QR code appears here.</p>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <div class="actions">
+        <button class="btn" id="dlPng" disabled>Download PNG</button>
+        <button class="btn sec" id="dlSvg" disabled>Download SVG</button>
+      </div>
+
+      <details open class="customize"><summary>Customize</summary>
+        <div class="swatches" id="themes" aria-label="Color themes"></div>
+        <div class="colors">
+          <div><label for="fg">Foreground</label><input type="color" id="fg" value="#000000"></div>
+          <div><label for="bg">Background</label><input type="color" id="bg" value="#ffffff"></div>
+        </div>
+        <label for="size">Size: <span id="sizeVal">512</span> px</label>
+        <input type="range" id="size" min="128" max="2048" step="32" value="512">
+        <label for="margin">Quiet zone: <span id="marginVal">4</span> modules</label>
+        <input type="range" id="margin" min="2" max="10" step="1" value="4">
+        <label for="ecc">Error correction</label>
+        <select id="ecc"><option value="L">Low (7%) – smallest code</option><option value="M" selected>Medium (15%) – recommended</option><option value="Q">Quartile (25%)</option><option value="H">High (30%) – most robust</option></select>
+      </details>
+
+      <details><summary>Scan tips</summary>
+        <ul class="tip">
+          <li>Keep strong contrast: dark code on a light background works best.</li>
+          <li>Don't shrink the quiet zone below 4 modules for print.</li>
+          <li>Always scan the final file (and the printed copy) with a phone before sharing.</li>
+          <li>Static codes can't be edited after printing.</li>
+        </ul>
+      </details>
+    </section>
+  </div>
+
+  <section class="prose" style="margin-top:56px">
+    <h2>About static QR codes</h2>
+    <p>The codes made here are <strong>static</strong>: your content is written directly into the pattern, so they work forever, need no account and track nothing. The flip side is that the content can't be changed after you print. See the <a href="help.html">Help &amp; FAQ</a> for details.</p>
+  </section>
+</main>
+
+<footer class="site"><div class="wrap">
+  <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="help.html">Help</a><a href="contact.html">Contact</a>
+  <p>&copy; 2026 QR Studio. QR Code is a registered trademark of DENSO WAVE INCORPORATED.</p>
+</div></footer>
+
+<script src="assets/qrcode.js"></script>
+<script src="assets/payload.js"></script>
+<script src="assets/render.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

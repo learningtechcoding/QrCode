@@ -1,0 +1,808 @@
+QR CODE GENERATOR WEBSITE
+Complete Project Plan
+Version: 1.0
+Date: October 2026
+
+============================================================
+1. PROJECT OVERVIEW
+============================================================
+
+Project goal:
+Build a modern, responsive website where users can generate, customize, download, and manage QR codes. The website should be simple for first-time visitors while offering advanced features for registered users and paid customers.
+
+Suggested working name:
+QR Studio (placeholder name; check domain and trademark availability before using it).
+
+Main value proposition:
+Create attractive, scannable QR codes quickly for URLs, text, Wi-Fi, contact cards, business details, and other supported data types.
+
+Target users:
+- Individuals and students
+- Small businesses and shops
+- Restaurants and cafes
+- Marketing teams and agencies
+- Event organizers
+- Freelancers and web developers
+- Businesses that need trackable QR campaigns
+
+Business model:
+- Free static QR code generation
+- Optional accounts for saving designs and history
+- Paid plans for dynamic QR codes, analytics, branding, bulk generation, and team features
+- Optional business/agency plan
+
+Important distinction:
+A static QR code stores its destination or content directly in the code. Its encoded content cannot be changed after printing. A dynamic QR code points to a redirect URL controlled by the website, allowing the destination to be changed and scan analytics to be collected. Dynamic codes require reliable redirect infrastructure and should be presented clearly as a separate feature.
+
+============================================================
+2. PRODUCT SCOPE AND PRIORITIES
+============================================================
+
+Build in phases instead of trying to launch every feature at once.
+
+MVP (first launch):
+1. Landing page
+2. QR generator with common QR types
+3. Live QR preview
+4. Basic design customization
+5. Download as PNG and SVG
+6. Mobile-responsive interface
+7. Validation and error messages
+8. Static QR generation without mandatory signup
+9. Privacy policy, terms, contact page, and help/FAQ
+10. Basic SEO and performance optimization
+
+Phase 2:
+1. User registration, login, and password reset
+2. Saved QR codes and generation history
+3. Dynamic QR codes
+4. Dashboard to edit and organize QR codes
+5. Scan analytics for dynamic codes
+6. More export formats and print-ready settings
+7. Logo upload and additional design controls
+
+Phase 3:
+1. Paid subscriptions and billing
+2. Bulk QR creation by CSV
+3. Custom branded short links
+4. Team/workspace support
+5. API access
+6. White-label options for agencies
+7. Advanced analytics and campaign management
+
+============================================================
+3. QR CODE TYPES
+============================================================
+
+Prioritize these types for the first release:
+
+A. URL / Website
+- Input: full URL
+- Validate and normalize the URL
+- Optionally allow users to test the destination
+- Warn users about unsafe or suspicious URLs where possible
+
+B. Plain Text
+- Input: text or message
+- Support line breaks and Unicode
+- Show character count and QR complexity feedback
+
+C. Wi-Fi
+- Inputs: network name (SSID), security type, password, hidden network
+- Support common security types, including WPA/WPA2 and open networks
+- Explain that anyone scanning the code may gain access to the network if credentials are embedded
+
+D. vCard / Contact
+- Name, organization, job title, phone, email, website, address
+- Generate a standard vCard-compatible QR payload
+- Test compatibility with common phone contact apps
+
+E. Email
+- Email address, subject, optional message
+- Generate a mailto payload
+
+F. Phone
+- Phone number
+- Generate a tel payload
+
+G. SMS
+- Phone number and optional prefilled message
+- Generate a supported SMS payload and test on major mobile platforms
+
+H. WhatsApp
+- Phone number in international format
+- Optional prefilled message
+- Generate a link using the official WhatsApp click-to-chat URL format
+
+I. Location / Map
+- Latitude and longitude or a map URL
+- Prefer a validated map link for consistent cross-device behavior
+
+J. Event / Calendar
+- Event name, start/end date and time, location, description
+- Use a supported calendar payload format and test with major calendar apps
+
+K. Social Media
+- Profile or page URL for supported platforms
+- Validate URL format
+
+Later types:
+- App download links
+- Payment links (country/provider-specific; clearly test and document limitations)
+- Product details
+- Multi-link landing page
+- Menu or catalog links
+- Business review links
+- Custom URL redirects
+- Bulk-generated QR codes
+
+Note:
+QR payload limits depend on content and error-correction level. Large payloads produce denser codes and may be harder to scan. Show a helpful warning rather than promising every input will work.
+
+============================================================
+4. USER EXPERIENCE AND PAGE STRUCTURE
+============================================================
+
+Public pages:
+1. Home
+2. QR Code Generator
+3. QR Code Types / Tools
+4. Pricing
+5. About
+6. Contact / Support
+7. Help Center / FAQ
+8. Blog / Guides
+9. Privacy Policy
+10. Terms of Service
+11. Cookie Policy, if applicable
+12. 404 page
+
+Generator layout:
+- Page title and short explanation
+- QR type selector, using tabs or a clear grid
+- Form fields for the selected type
+- Live QR preview
+- Customization panel
+- Download/export actions
+- Brief scan-safety and quality tips
+
+Suggested desktop layout:
+Left column: QR type and data form
+Center/right column: preview and customization
+Bottom section: instructions, FAQs, and related QR tools
+
+Suggested mobile layout:
+- Type selector at top
+- Inputs below
+- Preview in its own section
+- Customization controls in collapsible panels
+- Download button easy to reach
+- Avoid horizontal scrolling
+
+User flow:
+1. Visit the website
+2. Choose a QR type
+3. Enter the required information
+4. Validate the data
+5. Generate the QR code
+6. Customize colors, size, and optional logo
+7. Preview and test the code
+8. Download the file
+9. Optionally create an account to save it
+
+Keep free static generation available without signup to reduce friction.
+
+============================================================
+5. QR DESIGN AND EXPORT FEATURES
+============================================================
+
+MVP customization:
+- Foreground color
+- Background color
+- Preset color themes
+- QR size
+- Error-correction level, with safe default
+- Margin / quiet-zone control with a safe minimum
+- PNG download
+- SVG download
+
+Later customization:
+- Center logo upload
+- Rounded or alternative module styles, only where supported reliably
+- Eye/corner styles
+- Gradient options
+- Background image, only if contrast remains strong
+- Templates for business cards, posters, menus, packaging, and social media
+- PDF export
+- Print dimensions and DPI options
+- Batch export as ZIP
+
+Design safety rules:
+- Maintain sufficient contrast between the QR modules and background
+- Keep a clear quiet zone around the code
+- Do not let a logo cover too much of the QR code
+- Use error correction appropriate for the selected design
+- Show a warning if the chosen style may reduce scan reliability
+- Always test generated images with multiple QR scanner apps and devices
+- Never claim that a highly customized code is guaranteed to scan
+
+Download options:
+- PNG for general use
+- SVG for scalable digital and print use
+- PDF for print layouts in a later release
+- ZIP for bulk exports in a later release
+
+============================================================
+6. STATIC AND DYNAMIC QR CODE DESIGN
+============================================================
+
+Static QR codes:
+- Generate the QR image from the supplied payload
+- Can be generated in the browser or on the server
+- Do not require redirect hosting
+- Do not need scan tracking
+- Their encoded destination cannot be edited after download/printing
+- Avoid storing user-provided content unless the user explicitly saves it
+
+Dynamic QR codes:
+- QR code contains a website-controlled short URL, for example:
+  https://example.com/r/AbC123
+- The redirect service resolves the code to its current destination
+- Owner can update the destination without reprinting the code
+- Scan events can be recorded for analytics
+- Requires authentication and ownership checks for management
+- Requires rate limits, abuse prevention, monitoring, and reliable uptime
+- Destination changes should be logged for security and accountability
+
+Dynamic QR redirect requirements:
+- Validate destination URLs
+- Block dangerous schemes such as javascript: and data:
+- Apply abuse detection and reporting
+- Avoid open-redirect abuse by restricting redirect behavior to managed QR records
+- Protect redirect endpoints from excessive traffic
+- Consider bot filtering and privacy-friendly analytics
+- Make clear that scan counts may include bots or repeated scans
+- Do not collect unnecessary personal data or precise location without a lawful basis and clear notice
+
+Recommended launch approach:
+Start with static QR codes. Add dynamic QR codes only after the basic generator is stable and there is a plan for hosting, abuse prevention, privacy, and analytics.
+
+============================================================
+7. RECOMMENDED TECHNOLOGY STACK
+============================================================
+
+Option A: Laravel-focused stack
+Suitable if you want to build the product using Laravel.
+
+Frontend:
+- Laravel Blade
+- Tailwind CSS or Bootstrap (choose one main design system)
+- Alpine.js for small interactive controls
+- Livewire where server-driven interactivity is helpful
+- Vite for asset bundling
+
+Backend:
+- Laravel
+- PHP
+- MySQL or PostgreSQL
+- Laravel queues for bulk jobs, exports, emails, and analytics processing
+- Laravel scheduler for subscription checks and cleanup tasks
+
+QR generation:
+- Use a maintained QR code library compatible with PHP/Laravel
+- Confirm that it supports the needed output formats, error correction, and customization
+- Use a reliable SVG/PNG rendering path
+- Test output quality before committing to the library
+
+Authentication:
+- Laravel's supported authentication starter kit or equivalent maintained solution
+
+Payments:
+- Choose a payment provider available for the business's country and target customers
+- Verify merchant eligibility, supported currencies, recurring billing, taxes, and payout rules before implementation
+
+Storage:
+- Local storage during development
+- Object storage for production logos, exports, and other uploaded files if needed
+
+Deployment:
+- Linux server or managed Laravel hosting
+- HTTPS
+- Automated backups
+- Queue worker and scheduler
+- Monitoring and error reporting
+
+Option B: Next.js-focused stack
+Frontend:
+- Next.js with TypeScript
+- React
+- Tailwind CSS
+- Accessible UI component library
+
+Backend:
+- Laravel API, Node.js API, or another supported backend
+- PostgreSQL or MySQL
+- Object storage for user uploads and exports
+
+Choose one main architecture for the first release. Do not build duplicate backends without a clear need.
+
+Recommendation:
+If Laravel is your strongest stack, start with Laravel + Blade + Tailwind CSS + Alpine.js + MySQL. Keep QR generation in a dedicated service class so the library can be changed later.
+
+============================================================
+8. HIGH-LEVEL SYSTEM ARCHITECTURE
+============================================================
+
+Browser:
+- QR type selection
+- Input forms and client-side validation
+- Live preview
+- Customization controls
+- Download action
+
+Application:
+- Validation and payload builder
+- QR generation service
+- Authentication and authorization
+- QR record management
+- Subscription and plan enforcement
+- Redirect controller for dynamic QR codes
+- Analytics ingestion and reporting
+
+Database:
+- Users
+- QR codes
+- QR folders/tags
+- Scan events or aggregated analytics
+- Plans and subscriptions
+- Payments/webhook records
+- Teams/workspaces in a later phase
+- Audit logs for sensitive changes
+
+Infrastructure:
+- HTTPS
+- Database backups
+- File/object storage
+- Queue workers
+- Scheduled tasks
+- Error monitoring
+- Rate limiting
+- Logging and alerting
+
+Example QR generation flow:
+1. User submits QR type and values
+2. Server validates and normalizes input
+3. Payload builder creates a type-specific payload
+4. QR service renders the image
+5. User previews and downloads the result
+6. If the user chooses Save, the app stores the required metadata and image/configuration
+
+For static QR codes, avoid saving private content by default. For dynamic codes, save the destination and code identifier securely.
+
+============================================================
+9. DATABASE DESIGN (STARTING POINT)
+============================================================
+
+users
+- id
+- name
+- email (unique)
+- password
+- email_verified_at
+- timestamps
+
+qr_codes
+- id
+- user_id (nullable for anonymous generation if records are stored at all)
+- name
+- type (url, text, wifi, vcard, email, phone, sms, whatsapp, location, event, social)
+- mode (static, dynamic)
+- payload (consider privacy and encryption requirements)
+- destination_url (for dynamic QR codes)
+- public_code (unique identifier for dynamic redirects)
+- foreground_color
+- background_color
+- size
+- error_correction
+- logo_path (nullable)
+- status
+- timestamps
+- deleted_at (optional soft delete)
+
+qr_folders (later)
+- id
+- user_id
+- name
+- timestamps
+
+qr_folder_items (later)
+- id
+- qr_code_id
+- qr_folder_id
+
+qr_scan_events (dynamic QR only; design carefully)
+- id
+- qr_code_id
+- scanned_at
+- referrer (nullable and sanitized)
+- device_category (optional)
+- country_code (optional, only where justified and legally appropriate)
+- bot_flag
+- timestamps
+
+For high-volume use, aggregate analytics instead of retaining every raw event indefinitely. Define retention and deletion policies.
+
+plans
+- id
+- name
+- price
+- billing_interval
+- limits/configuration
+- active
+- timestamps
+
+subscriptions
+- id
+- user_id
+- plan_id
+- provider_subscription_id
+- status
+- current_period_start
+- current_period_end
+- timestamps
+
+payment_events
+- id
+- provider_event_id (unique)
+- event_type
+- processing_status
+- processed_at
+- timestamps
+
+Important database practices:
+- Add indexes to user_id, public_code, mode, status, and timestamps where appropriate
+- Use foreign keys and deliberate delete behavior
+- Enforce ownership checks in application policies
+- Never store raw payment card details
+- Do not store passwords in plain text
+- Keep secrets in environment variables, not source control
+- Add migrations and seeders
+- Define retention and deletion rules for analytics and uploaded files
+
+Treat this as a starting schema, not a final migration. Refine fields after the MVP requirements and QR library are selected.
+
+============================================================
+10. SUGGESTED LARAVEL STRUCTURE
+============================================================
+
+Possible classes:
+- QrCodeController: accepts requests and returns preview/download responses
+- QrCodeService: creates QR images
+- QrPayloadBuilder: converts form values into type-specific payloads
+- QrCodeRepository or Eloquent models: persists saved QR codes
+- DynamicQrRedirectController: resolves public dynamic codes
+- QrAnalyticsService: records and aggregates scan events
+- SubscriptionService: checks feature limits
+- ExportService: prepares files and ZIP exports
+- Controllers/Form Requests: validation boundaries
+- Policies: authorization and ownership rules
+
+Possible routes:
+- GET /qr-generator
+- POST /qr/preview
+- POST /qr/download
+- GET /qr-codes (authenticated dashboard)
+- POST /qr-codes (save)
+- GET /qr-codes/{qrCode}
+- PATCH /qr-codes/{qrCode}
+- DELETE /qr-codes/{qrCode}
+- GET /r/{publicCode} (dynamic redirect)
+- GET /qr-codes/{qrCode}/analytics (authenticated and authorized)
+
+Use named routes, Form Request validation, policies, CSRF protection for web forms, and rate limits. Never rely only on hiding UI controls to enforce permissions.
+
+============================================================
+11. SECURITY, PRIVACY, AND RELIABILITY
+============================================================
+
+Security checklist:
+- Validate and normalize every QR input
+- Escape user content when rendering HTML
+- Validate uploaded logo MIME type, extension, size, and actual file content
+- Re-encode or sanitize image uploads where practical
+- Store uploads outside executable/public paths when possible
+- Use authorization policies for saved QR records
+- Rate-limit generation, login, redirects, and expensive exports
+- Protect authentication and password reset flows
+- Verify payment webhooks using provider signatures
+- Use idempotency for webhook processing
+- Avoid logging passwords, tokens, Wi-Fi passwords, or sensitive QR payloads
+- Keep dependencies patched
+- Use HTTPS in production
+- Back up the database and test restoration
+- Monitor errors, latency, storage use, and unusual redirect traffic
+
+Privacy checklist:
+- Publish a clear privacy policy
+- Explain what data is collected and why
+- Let users generate static QR codes without saving content when feasible
+- Provide account/data deletion for registered users
+- Set a retention period for scan analytics
+- Minimize IP address retention; if IPs are used for abuse prevention, document the purpose and retention
+- Make optional analytics and tracking transparent
+- Review applicable privacy and consumer laws for the countries served
+
+Abuse prevention:
+- Block malicious redirect destinations
+- Provide a way to report abusive QR destinations
+- Monitor phishing and spam patterns
+- Prevent dynamic QR codes from becoming an unrestricted redirect service
+- Add account and plan limits
+- Provide an abuse response and suspension process
+
+============================================================
+12. PRICING AND MONETIZATION
+============================================================
+
+Suggested structure (validate through user research; prices are not finalized):
+
+Free:
+- Static QR generation
+- Common QR types
+- Basic colors and sizes
+- PNG/SVG downloads
+- No account required for basic use
+- Fair-use limits for expensive features
+
+Pro:
+- Dynamic QR codes
+- Destination editing
+- Scan analytics
+- Saved codes and folders
+- Logo and advanced design options
+- Higher usage limits
+
+Business:
+- More dynamic QR codes
+- Bulk CSV generation
+- Team members and shared folders
+- Campaign analytics
+- Branded short links
+- Export and support options
+
+Enterprise / Agency (later):
+- API access
+- White-label options
+- Multiple workspaces
+- Higher limits
+- Priority support
+- Custom billing or contracts
+
+Pricing decisions:
+- Research competitor pricing
+- Estimate hosting, storage, support, and payment processing costs
+- Check payment-provider availability in your country
+- Test willingness to pay with real users
+- Avoid promising unlimited usage until costs and abuse risks are understood
+
+============================================================
+13. SEO AND CONTENT PLAN
+============================================================
+
+Technical SEO:
+- Unique title and meta description for each public tool page
+- Semantic HTML and accessible headings
+- Fast loading and optimized assets
+- Canonical URLs
+- XML sitemap
+- Robots.txt
+- Open Graph metadata
+- Structured data only where accurate and appropriate
+- Good Core Web Vitals
+- Avoid indexing private dashboards and user-specific QR pages
+
+Suggested landing page keywords:
+- Free QR code generator
+- Create QR code online
+- Website QR code generator
+- Wi-Fi QR code generator
+- vCard QR code generator
+- WhatsApp QR code generator
+- QR code with logo
+- Dynamic QR code generator
+- Bulk QR code generator
+
+Create separate helpful pages for each QR tool. Each page should have a working generator, original instructions, use cases, and FAQs. Avoid making many near-identical low-value pages just to target keywords.
+
+Suggested blog topics:
+- How to make a QR code for a website
+- How to create a Wi-Fi QR code
+- Static vs dynamic QR codes
+- How to print QR codes without losing scan quality
+- How to use QR codes on restaurant menus
+- How to create a QR code for a business card
+- QR code safety and phishing awareness
+- How to test a QR code before printing
+
+============================================================
+14. ANALYTICS AND SUCCESS METRICS
+============================================================
+
+Measure:
+- Website visits and source channels
+- Generator starts
+- Successful QR generations
+- Download rate
+- Most-used QR types
+- Validation errors
+- Signup conversion
+- Free-to-paid conversion
+- Active paid subscribers
+- Dynamic QR redirect uptime and latency
+- Scan events per dynamic code
+- Subscription churn and cancellations
+- Support requests and abuse reports
+
+Privacy note:
+Use privacy-conscious analytics and collect only what is needed. Do not treat scan events as unique people unless the methodology supports that claim. Explain how bot filtering and repeat scans are handled.
+
+Initial success goals (set actual targets after baseline data):
+- Users can create and download a basic QR code without assistance
+- QR output scans on common iOS and Android devices
+- Generator works on mobile and desktop
+- No critical security issues
+- Stable performance during expected traffic
+- Clear conversion funnel from landing page to generation and download
+
+============================================================
+15. TESTING PLAN
+============================================================
+
+Functional tests:
+- Each QR type builds the correct payload
+- Required fields and invalid inputs are handled
+- Special characters and Unicode are supported
+- Download files open correctly
+- SVG and PNG render at expected sizes
+- Color and size changes update preview
+- Logo upload constraints work
+- Saved codes belong only to the correct user
+- Dynamic destination updates work
+- Deleted/disabled dynamic codes behave safely
+- Subscription limits are enforced
+- Payment webhooks cannot be processed twice
+
+Compatibility tests:
+- Current Chrome, Firefox, Edge, and Safari
+- Common Android and iOS devices
+- Common camera and QR scanning applications
+- Desktop, tablet, and mobile layouts
+- Keyboard-only navigation
+- Screen-reader labels and accessible focus states
+
+Security tests:
+- Authorization and IDOR checks
+- XSS and malicious input tests
+- Upload validation tests
+- Rate-limit tests
+- Redirect abuse tests
+- Authentication and password reset tests
+- Payment webhook signature tests
+- Dependency vulnerability checks
+
+Before printing:
+- Scan the actual exported file
+- Test the physical print at the intended size
+- Check contrast and quiet zone
+- Test in typical lighting and at realistic scanning distances
+
+============================================================
+16. DEVELOPMENT ROADMAP
+============================================================
+
+Week 1: Planning and foundation
+- Confirm name, target audience, and MVP
+- Review QR library options and licenses
+- Create wireframes and visual design
+- Set up repository, Laravel project, database, and environments
+- Establish coding standards and testing setup
+
+Week 2: Core generator
+- Implement URL and text QR types
+- Build payload validation
+- Add QR preview
+- Add PNG/SVG download
+- Implement responsive layout
+
+Week 3: Additional QR types and customization
+- Add Wi-Fi, vCard, email, phone, SMS, WhatsApp, and location
+- Add color, size, and error-correction controls
+- Improve error states and help text
+- Test exported QR codes on multiple devices
+
+Week 4: Public launch readiness
+- Build landing page, tool pages, FAQ, contact, terms, and privacy pages
+- Add SEO metadata and sitemap
+- Run accessibility, browser, performance, and security checks
+- Deploy staging and run user acceptance testing
+- Fix high-priority bugs and launch the static QR MVP
+
+After launch:
+- Gather user feedback
+- Add accounts and saved QR codes if demand supports them
+- Design and test dynamic QR redirects
+- Add analytics and subscriptions only after core usage is stable
+- Add bulk generation and API features based on actual demand
+
+Timeline is a planning estimate. Actual delivery depends on available time, design depth, selected libraries, testing, and integrations.
+
+============================================================
+17. LAUNCH CHECKLIST
+============================================================
+
+Product:
+[ ] Core QR types work
+[ ] Preview and downloads work
+[ ] Static/dynamic distinction is clear
+[ ] Helpful validation and scan-quality warnings are present
+[ ] Mobile layout is usable
+
+Quality:
+[ ] Cross-browser tests completed
+[ ] QR scan tests completed on iOS and Android
+[ ] Accessibility review completed
+[ ] Performance reviewed
+[ ] Error monitoring configured
+
+Security and privacy:
+[ ] HTTPS enabled
+[ ] Secrets are not committed
+[ ] Validation and rate limits enabled
+[ ] Privacy policy and terms published
+[ ] Upload and redirect security reviewed
+[ ] Backups and restoration tested
+[ ] Account/data deletion process documented if accounts exist
+
+Operations:
+[ ] Domain and hosting configured
+[ ] Production environment variables set
+[ ] Database migrations run
+[ ] Scheduler and queue workers configured if needed
+[ ] Error alerts configured
+[ ] Contact/support method works
+[ ] Deployment and rollback process documented
+
+Marketing:
+[ ] Landing page copy finalized
+[ ] Tool pages have useful content
+[ ] Search engine indexing checked
+[ ] Analytics configured with appropriate privacy settings
+[ ] Feedback form or support channel available
+
+============================================================
+18. KEY DECISIONS TO MAKE BEFORE CODING
+============================================================
+
+1. Will the first version support only static QR codes? Recommended: yes.
+2. Which QR types are required for launch? Recommended: URL, text, Wi-Fi, vCard, email, phone, SMS, WhatsApp, and location.
+3. Will users need accounts? Recommended: not for basic generation; accounts for saved codes and advanced features.
+4. Which framework? Recommended if Laravel is your primary stack: Laravel + Blade + Tailwind CSS + Alpine.js + MySQL.
+5. Which export formats? Recommended: PNG and SVG first.
+6. Will there be a logo upload? Add after the basic output is reliable.
+7. How will the product earn money? Validate demand before building subscriptions.
+8. Which payment provider is available to the business and target customers?
+9. Where will the site be hosted, and what is the monthly budget?
+10. Which domain and brand name will be used? Verify availability before purchasing.
+
+============================================================
+19. FINAL RECOMMENDATION
+============================================================
+
+Build a polished static QR generator first. Focus on speed, simple forms, accurate QR payloads, reliable PNG/SVG downloads, safe customization, mobile usability, and search-friendly tool pages.
+
+Do not begin with subscriptions, team management, bulk exports, API access, and advanced analytics all at once. These features add complexity and should follow evidence that users need them.
+
+Recommended first milestone:
+A visitor can open the website, select URL/Text/Wi-Fi/vCard, enter information, preview the QR code, customize its colors, download PNG or SVG, and scan it successfully on a phone without creating an account.
+
+Once that milestone is reliable, add saved codes, then dynamic QR codes and analytics, and finally monetization and business features.
